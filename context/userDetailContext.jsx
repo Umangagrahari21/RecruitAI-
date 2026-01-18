@@ -1,11 +1,3 @@
-import React from 'react'
+import {createContext} from "react";
 
-const userDetailContext = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
-
-export default userDetailContext
+export const UserDetailContext =createContext();
