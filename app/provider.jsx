@@ -2,7 +2,7 @@
 
 import { UserDetailContext } from "@/context/userDetailContext";
 import { supabase } from "@/services/SupabaseClient";
-import React, { useEffect, useState } from "react"; // 
+import React, { useEffect, useState ,useContext} from "react"; // 
 
 function Provider({ children }) {
 
@@ -61,3 +61,13 @@ export const useUser=()=>{
   const context=useContext(UserDetailContext);
   return context;
 }
+// export const useUser = () => {
+//   const context = useContext(UserDetailContext);
+
+//   if (!context) {
+//     return { user: null, setUser: () => {} };
+//   }
+
+//   return context;
+// };
+
