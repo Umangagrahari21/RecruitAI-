@@ -21,7 +21,8 @@ function CreateInterview() {
       console.log("formData",formData)
     }
 const onGoToNext=()=>{
-  if(!formData?.jobPostion || !formData?.jobDescription ||!formData?.duaration || !formData.type){
+  // if(!formData?.jobPosition || !formData?.jobDescription ||!formData?.duration || !formData.type){
+  if(!formData?.jobPosition || !formData?.jobDescription || !formData?.duration || !formData?.type){
     toast("Please enter all details!")
     return;
   }

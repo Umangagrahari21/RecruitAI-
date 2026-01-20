@@ -142,7 +142,7 @@ const FormContainer = ({onHandleInputChange,GoToNext} ) => {
 
       
       <div className='mt-6 flex justify-end' onClick={()=>GoToNext()}>
-        <Button>Gnerate Question <ArrowRight/> </Button>
+        <Button>Generate Question <ArrowRight/> </Button>
       </div>
       
     </div>

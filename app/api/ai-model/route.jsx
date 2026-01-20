@@ -17,16 +17,18 @@ export async function POST(req){
   apiKey: process.env.OPENROUTER_API_KEY
   
     })
-    async function main() {
   const completion = await openai.chat.completions.create({
-    model: "google/gemini-2.0-flash-exp:free",
+    // model: "google/gemini-2.0-flash-exp:free",
+    // model: "google/gemini-2.0-flash",
+    model: "google/gemini-1.5-flash",
+
     messages: [
       { role: "user", content:FINAL_PROMPT}
     ],
+    // responze_format 
   })
   console.log(completion.choices[0].message)
   return NextResponse.json(completion.choices[0].message)
-}
 }
     catch(error){
         console.log(error);
