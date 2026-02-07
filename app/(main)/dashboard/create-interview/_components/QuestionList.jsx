@@ -115,26 +115,27 @@ console.log("INTERVIEW QUESTIONS:", result.data.interviewQuestions);
 )}
 <div className="flex justify-end mt-10">
   <button
-    onClick={onFinish}
-    disabled={saveLoading}
-    className="
-      px-8 py-3
-      rounded-xl
-      bg-gradient-to-r from-indigo-500 to-purple-600
-      text-white font-semibold
-      shadow-md
-      transition-all duration-300
-      hover:from-indigo-600 hover:to-purple-700
-      hover:shadow-xl hover:-translate-y-1
-      active:scale-95
-      focus:outline-none focus:ring-4 focus:ring-indigo-300
-      disabled:opacity-60 disabled:cursor-not-allowed
-      flex items-center gap-2
-    "
-  >
-    {saveLoading && <Loader2 className="animate-spin" size={18} />}
-    Create Interview Link & Finish
-  </button>
+  onClick={onFinish}
+  disabled={saveLoading}
+  className="
+    px-8 py-3
+    rounded-xl
+    bg-primary
+    text-white font-semibold
+    shadow-md
+    transition-all duration-300
+    hover:bg-primary/90
+    hover:shadow-xl hover:-translate-y-1
+    active:scale-95
+    focus:outline-none focus:ring-4 focus:ring-primary/30
+    disabled:opacity-60 disabled:cursor-not-allowed
+    flex items-center gap-2
+  "
+>
+  {saveLoading && <Loader2 className="animate-spin" size={18} />}
+  Create Interview Link & Finish
+</button>
+
 </div>
 
 
