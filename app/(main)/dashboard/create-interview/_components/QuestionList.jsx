@@ -2,10 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Loader2Icon } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/services/SupabaseClient";
+import {v4 as uuidv4} from 'uuid';
+import QuestionListContainer from "./QuestionListContainer";
+import { useUser } from "@/app/provider";
+
+
 
 const QuestionList = ({ formData }) => {
   const [loading, setLoading] = useState(false);
   const [questionList, setQuestionList] = useState(null);
+  const {user}=useUser();
 
   useEffect(() => {
     if (formData) {
@@ -46,6 +53,31 @@ console.log("INTERVIEW QUESTIONS:", result.data.interviewQuestions);
       setLoading(false);
     }
   };
+  const onFinish = async () => {
+  const interview_id = uuidv4();
+
+  const { data, error } = await supabase
+    .from('interview') 
+    .insert([
+      {
+        ...formData,
+        questionList: questionList,
+        userEmail: user?.email,
+        interview_id: interview_id
+      }
+    ])
+    .select();
+
+  if (error) {
+    console.error("❌ Supabase Insert Error:", error);
+    toast("Failed to save interview");
+    return;
+  }
+
+  console.log("✅ Saved successfully:", data);
+  toast("Interview saved successfully!");
+};
+
 
   return (
     <div className="mt-5">
@@ -61,18 +93,43 @@ console.log("INTERVIEW QUESTIONS:", result.data.interviewQuestions);
         </div>
       )}
 
-      {questionList?.length > 0 && (
+      {/* {questionList?.length > 0 && (
         <div>
           {questionList.map((item, index) => (
             <div key={index} className="p-3 border-gray-300">
               <h2 className="font-medium">{item.question}</h2>
-              {/* <h2>Type:{item?.Type}</h2> */}
               <h2>Type: {item?.type}</h2>
 
             </div>
           ))}
         </div>
-      )}
+      )} */}
+      {questionList?.length > 0 && (
+  <div className="space-y-4">
+    <QuestionListContainer questionList={questionList}/>
+  </div>
+)}
+
+      <div className="flex justify-end mt-10">
+  <button
+    onClick={() => onFinish()}
+    className="
+      px-8 py-3
+      rounded-xl
+      bg-gradient-to-r from-indigo-500 to-purple-600
+      text-white font-semibold
+      shadow-md
+      transition-all duration-300
+      hover:from-indigo-600 hover:to-purple-700
+      hover:shadow-xl hover:-translate-y-1
+      active:scale-95
+      focus:outline-none focus:ring-4 focus:ring-indigo-300
+    "
+  >
+    Finish
+  </button>
+</div>
+
     </div>
   );
 };
