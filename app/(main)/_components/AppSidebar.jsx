@@ -32,9 +32,11 @@ export function AppSidebar() {
           height={50} 
           className="w-[70px]" 
         />
+        <Link href="/dashboard/create-interview"> 
         <Button className='w-full mt-5'>
           <Plus /> Create New Interview
-        </Button>
+        </Button></Link>
+       
       </SidebarHeader>
 
       <SidebarContent>

@@ -10,7 +10,9 @@ import AlertConfirmation from "./_components/AlertConfirmation";
 export default function StartInterview() {
   const context = useContext(InterviewDataContext);
   const vapiRef = useRef(null);
+
   const [callStarted, setCallStarted] = useState(false);
+  const [speaking, setSpeaking] = useState(null); // "ai" | "user" | null
 
   /* ---------- INIT VAPI ONCE ---------- */
   useEffect(() => {
@@ -18,20 +20,31 @@ export default function StartInterview() {
       vapiRef.current = new Vapi(process.env.NEXT_PUBLIC_VAPI_API_KEY);
 
       vapiRef.current.on("call-start", () => {
-        console.log("📞 Vapi call started");
+        console.log("📞 Call started");
         setCallStarted(true);
+        setSpeaking("ai");
       });
 
       vapiRef.current.on("speech-start", () => {
-        console.log("🗣️ Assistant speaking");
+        console.log("🗣️ AI speaking");
+        setSpeaking("ai");
       });
 
       vapiRef.current.on("speech-end", () => {
-        console.log("🔇 Assistant stopped speaking");
+        console.log("🎧 User turn");
+        setSpeaking("user");
+      });
+
+      vapiRef.current.on("call-end", () => {
+        console.log("📴 Call ended");
+        setCallStarted(false);
+        setSpeaking(null);
       });
 
       vapiRef.current.on("error", (err) => {
         console.error("❌ Vapi error:", err);
+        setSpeaking(null);
+        setCallStarted(false);
       });
     }
   }, []);
@@ -50,11 +63,7 @@ export default function StartInterview() {
   const startCall = async () => {
     if (callStarted) return;
 
-    console.log("🚀 startCall triggered");
-
-    // Required for browser audio
     await navigator.mediaDevices.getUserMedia({ audio: true });
-    console.log("🎤 Mic permission granted");
 
     const questionList = interviewInfo?.interviewData?.questionList
       ?.map((item) => item.question)
@@ -63,11 +72,6 @@ export default function StartInterview() {
     const assistantOptions = {
       name: "AI Recruiter",
       firstMessage: `Hi ${interviewInfo?.userName}, welcome to your ${interviewInfo?.interviewData?.jobPosition} interview.`,
-      // transcription: {
-      //   provider: "deepgram",
-      //   model: "nova-2",
-      //   language: "en-US",
-      // },
       model: {
         provider: "openai",
         model: "gpt-4o-mini",
@@ -81,7 +85,7 @@ Ask questions one by one.
 Job Position: ${interviewInfo?.interviewData?.jobPosition}
 Questions: ${questionList}
 
-Greet the candidate and ask the first question out loud.
+Start by greeting the candidate and asking the first question out loud.
             `.trim(),
           },
         ],
@@ -93,9 +97,9 @@ Greet the candidate and ask the first question out loud.
 
   /* ---------- STOP CALL ---------- */
   const stopInterview = () => {
-    console.log("🛑 Interview stopped");
     vapiRef.current?.stop();
     setCallStarted(false);
+    setSpeaking(null);
   };
 
   return (
@@ -109,7 +113,13 @@ Greet the candidate and ask the first question out loud.
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
         {/* AI Recruiter */}
-        <div className="bg-white p-10 rounded-lg border flex flex-col items-center gap-3">
+        <div
+          className={`bg-white p-10 rounded-lg border flex flex-col items-center gap-3 transition-all duration-300 ${
+            speaking === "ai"
+              ? "ring-4 ring-blue-500 scale-105"
+              : "opacity-80"
+          }`}
+        >
           <Image
             src="/ai.png"
             alt="AI Recruiter"
@@ -121,7 +131,13 @@ Greet the candidate and ask the first question out loud.
         </div>
 
         {/* User */}
-        <div className="bg-white p-10 rounded-lg border flex flex-col items-center gap-3">
+        <div
+          className={`bg-white p-10 rounded-lg border flex flex-col items-center gap-3 transition-all duration-300 ${
+            speaking === "user"
+              ? "ring-4 ring-green-500 scale-105"
+              : "opacity-80"
+          }`}
+        >
           <div className="w-14 h-14 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xl font-bold">
             {userInitial}
           </div>
@@ -144,7 +160,9 @@ Greet the candidate and ask the first question out loud.
       </div>
 
       <h2 className="text-sm text-gray-400 text-center mt-5">
-        {callStarted ? "Interview in Progress..." : "Click the mic to start"}
+        {!callStarted && "Click the mic to start"}
+        {callStarted && speaking === "ai" && "AI is speaking..."}
+        {callStarted && speaking === "user" && "Listening to you..."}
       </h2>
     </div>
   );

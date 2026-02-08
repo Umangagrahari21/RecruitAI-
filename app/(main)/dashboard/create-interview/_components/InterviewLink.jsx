@@ -69,7 +69,7 @@ function InterviewLink({ interviewId, formData }) {
           />
           <Button
   onClick={onCopyLink}
-  className="bg-red-600 hover:bg-red-700 text-white"
+  className="bg-primary hover:bg-red-700 text-white"
 >
   <Copy className="w-4 h-4 mr-2" />
   Copy Link
@@ -120,12 +120,12 @@ function InterviewLink({ interviewId, formData }) {
           </Button>
         </Link>
 
-        <Link href="/dashboard/create-interview">
+        {/* <Link href="/dashboard/create-interview">
           <Button>
             <Plus className="bg-red-600 hover:bg-red-700 text-white" />
-            Create New Interview
+            + Create New Interview
           </Button>
-        </Link>
+        </Link> */}
       </div>
 
     </div>

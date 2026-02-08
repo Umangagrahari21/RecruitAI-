@@ -2,7 +2,8 @@
 
 import { Video } from "lucide-react";
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button"; // correct import
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const LatestInterviewList = () => {
   const [interviewList, setInterviewList] = useState([]);
@@ -10,7 +11,7 @@ const LatestInterviewList = () => {
   return (
     <div className="my-5">
       <h2 className="font-bold text-2xl p-3">
-        Previously Created Interview
+         Created Interview
       </h2>
 
       {interviewList?.length === 0 && (
@@ -19,7 +20,12 @@ const LatestInterviewList = () => {
           <h2 className="text-gray-400">
             You don't have any interview!
           </h2>
-          <Button>+ Create New Interview</Button>
+
+          <Link href="/dashboard/create-interview">
+            <Button>
+              + Create New Interview
+            </Button>
+          </Link>
         </div>
       )}
     </div>
