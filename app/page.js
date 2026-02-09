@@ -47,7 +47,7 @@ export default function Home() {
             </button>
           </Link>
 
-          <Link href="https://www.geeksforgeeks.org/artificial-intelligence/artificial-intelligenceai-interview-questions-and-answers/">
+          <Link href="https://www.geeksforgeeks.org/artificial-intelligence/generative-ai-interview-question-with-answer/">
           <button className="border border-gray-300 px-6 py-3 rounded-lg font-semibold text-gray-700 hover:bg-gray-100 transition">
             Learn More
           </button>

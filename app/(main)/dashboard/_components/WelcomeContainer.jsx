@@ -25,7 +25,7 @@ const WelcomeContainer = () => {
             Welcome Back{user?.name ? `, ${user.name}` : ""}
           </h2>
           <h2 className="text-gray-800">
-            AI-driven Interview, Hassle free
+            Smarter interviews, seamlessly powered by AI
           </h2>
         </div>
 
