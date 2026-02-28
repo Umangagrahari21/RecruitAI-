@@ -128,7 +128,7 @@ export default function Interview() {
             <div className="flex justify-center my-8">
               <div className="relative group">
                 <Image
-                  src="/interview.png"
+                  src="/interview.jpg"
                   alt="interview"
                   width={500}
                   height={500}

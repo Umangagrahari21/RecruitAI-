@@ -58,7 +58,7 @@ function InterviewLink({ interviewId, formData }) {
           <h2 className="font-bold">Interview Link</h2>
 
           <span className="p-1 px-2 text-primary bg-blue-50 rounded-md text-sm">
-            Valid for 30 Days
+            Valid for 24 hours
           </span>
         </div>
 
