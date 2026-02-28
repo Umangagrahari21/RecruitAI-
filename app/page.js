@@ -17,7 +17,7 @@ export default function Home() {
             />
           </div>
           <span className="text-xl font-bold text-gray-800">
-            AI Recruiter
+            RecruitAI
           </span>
         </div>
 
@@ -32,12 +32,12 @@ export default function Home() {
       <section className="max-w-6xl mx-auto px-6 py-20 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
           AI-Driven Interviews, <br />
-          <span className="text-green-600">Hassle-Free Hiring</span>
+          <span className="text-green-600">Next-Gen Hiring</span>
         </h1>
 
         <p className="mt-6 text-gray-600 text-lg max-w-2xl mx-auto">
-          Conduct automated interviews, screen candidates smarter,
-          and save time using AI-powered voice interviews.
+          Let intelligent voice interviews handle the screening,
+          while you focus on choosing the best talent.
         </p>
 
         <div className="mt-10 flex justify-center gap-4">
@@ -62,7 +62,7 @@ export default function Home() {
             <Video />
           </div>
           <h3 className="mt-4 font-semibold text-lg text-gray-800">
-            AI Video Interviews
+            AI Video Interviews(upcoming)
           </h3>
           <p className="mt-2 text-gray-500 text-sm">
             Create and conduct AI-powered interviews automatically.
@@ -74,7 +74,7 @@ export default function Home() {
             <Phone />
           </div>
           <h3 className="mt-4 font-semibold text-lg text-gray-800">
-            Phone Screening
+            Phone Screening(upcoming)
           </h3>
           <p className="mt-2 text-gray-500 text-sm">
             Schedule AI phone screening calls with candidates.
